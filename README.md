@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Priorizador de Features — Product Building Essentials
 
-## Getting Started
+Punto de partida del curso [Product Building Essentials](https://alaimolabs.com/pbe)
+de **Alaimo Labs**.
 
-First, run the development server:
+Durante el curso vas a transformar este shell casi vacío en una app completa de
+priorización de features usando **Claude Code**, sin escribir código a mano.
+
+## Requisitos previos
+
+Antes de la primera sesión, asegurate de tener:
+
+1. **Node.js 20+** — [nodejs.org](https://nodejs.org) (versión LTS)
+2. **Visual Studio Code** — [code.visualstudio.com](https://code.visualstudio.com)
+3. **Claude Code** con plan Pro — [claude.com/claude-code](https://claude.com/claude-code)
+4. Una cuenta gratuita en **Supabase** — [supabase.com](https://supabase.com) *(se usa en la sesión 2)*
+5. Una cuenta gratuita en **Vercel** — [vercel.com](https://vercel.com) *(se usa en la sesión 2)*
+
+## Puesta en marcha
 
 ```bash
+# 1. Cloná este repositorio
+git clone <URL-del-repo>
+cd pbe-starter
+
+# 2. Instalá las dependencias
+npm install
+
+# 3. Levantá el servidor de desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrí [http://localhost:3000](http://localhost:3000). Si ves la pantalla de
+bienvenida de Alaimo Labs, tu entorno está listo. 🎉
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Cómo se usa este repo en el curso
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Módulo | Tema | Qué construís |
+|--------|------|----------------|
+| 1 | Fundamentos de Claude Code y `CLAUDE.md` | Captura de features con datos en memoria |
+| 2 | Persistencia de datos | Base de datos en Supabase + tiempo real |
+| 3 | Lógica de negocio | Score RICE, ranking automático, matriz Impacto vs. Esfuerzo, filtros |
+| 4 | Debugging y deployment | Diagnóstico de errores y publicación en Vercel |
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+El archivo [`CLAUDE.md`](./CLAUDE.md) contiene la visión del producto y las
+convenciones del proyecto: es el contexto persistente que Claude Code lee en
+cada sesión, y el primer tema del curso.
