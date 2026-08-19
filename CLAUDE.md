@@ -40,9 +40,11 @@ todavía no están configurados en este proyecto.
 
 ## Comandos
 
-- `npm run dev` — servidor de desarrollo en http://localhost:3000
-- `npm run build` — build de producción (usalo para verificar que no hay errores)
-- `npm run lint` — linter
+Este proyecto usa **pnpm** (no npm ni yarn).
+
+- `pnpm dev` — servidor de desarrollo en http://localhost:3000
+- `pnpm build` — build de producción (usalo para verificar que no hay errores)
+- `pnpm lint` — linter
 
 ## Estructura
 
@@ -56,4 +58,4 @@ todavía no están configurados en este proyecto.
   `title`, `reach`, `impact`, `confidence`, `effort`, `status`, `category`).
 - Componentes de React en `src/components/` cuando la app crezca.
 - Diseño limpio y minimalista con Tailwind; la app debe verse bien en modo claro y oscuro.
-- Antes de dar por terminado un cambio, verificá que `npm run build` pase sin errores.
+- Antes de dar por terminado un cambio, verificá que `pnpm build` pase sin errores.
