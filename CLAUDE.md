@@ -28,7 +28,7 @@ La app terminada permite a un equipo de producto:
 6. **Colaborar en tiempo real**: los cambios de otros usuarios aparecen sin recargar.
 
 No construyas todo esto de una vez: el curso lo desarrolla módulo a módulo.
-Implementá solo lo que se te pida en cada prompt.
+Implementa solo lo que se te pida en cada prompt.
 
 ## Stack técnico
 
@@ -36,14 +36,16 @@ Implementá solo lo que se te pida en cada prompt.
 - **Tailwind CSS** para estilos
 
 La base de datos (Supabase) y el deployment (Vercel) se agregan durante el curso;
-todavía no están configurados en este proyecto.
+todavía no están configurados en este proyecto. Cuando se conecte Supabase, usa
+las API keys nuevas (`sb_publishable_...` en `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`),
+nunca las legacy (anon/service_role JWT).
 
 ## Comandos
 
 Este proyecto usa **pnpm** (no npm ni yarn).
 
 - `pnpm dev` — servidor de desarrollo en http://localhost:3000
-- `pnpm build` — build de producción (usalo para verificar que no hay errores)
+- `pnpm build` — build de producción (úsalo para verificar que no hay errores)
 - `pnpm lint` — linter
 
 ## Estructura
@@ -53,9 +55,9 @@ Este proyecto usa **pnpm** (no npm ni yarn).
 
 ## Convenciones
 
-- Todo el texto visible para el usuario va en **español**.
+- Todo el texto visible para el usuario va en **español neutro** (tuteo, nunca voseo).
 - Nombres de variables, funciones y tablas en **inglés** (ej: `features`,
   `title`, `reach`, `impact`, `confidence`, `effort`, `status`, `category`).
 - Componentes de React en `src/components/` cuando la app crezca.
 - Diseño limpio y minimalista con Tailwind; la app debe verse bien en modo claro y oscuro.
-- Antes de dar por terminado un cambio, verificá que `pnpm build` pase sin errores.
+- Antes de dar por terminado un cambio, verifica que `pnpm build` pase sin errores.
