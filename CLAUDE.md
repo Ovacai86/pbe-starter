@@ -63,3 +63,7 @@ Este proyecto usa **pnpm** (no npm ni yarn).
 - Los formularios validan en el cliente antes de enviar y muestran los mensajes de error debajo de cada campo.
 - Ninguna pantalla queda sin estado vacío ni sin estado de carga.
 - Antes de dar por terminado un cambio, verifica que `pnpm build` pase sin errores.
+
+---
+
+Última actualización: 2026-08-26
