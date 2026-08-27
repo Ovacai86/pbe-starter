@@ -1,30 +1,14 @@
-export type FeatureStatus =
-  | "idea"
-  | "en_evaluacion"
-  | "priorizada"
-  | "en_desarrollo"
-  | "lanzada";
-
 export interface Feature {
   id: string;
   title: string;
   description: string;
   category: string;
-  status: FeatureStatus;
   reach: number;
   impact: number;
   confidence: number;
   effort: number;
   riceScore: number;
 }
-
-export const STATUS_OPTIONS: { value: FeatureStatus; label: string }[] = [
-  { value: "idea", label: "Idea" },
-  { value: "en_evaluacion", label: "En evaluación" },
-  { value: "priorizada", label: "Priorizada" },
-  { value: "en_desarrollo", label: "En desarrollo" },
-  { value: "lanzada", label: "Lanzada" },
-];
 
 export const IMPACT_OPTIONS: { value: number; label: string }[] = [
   { value: 0.25, label: "Mínimo (0.25)" },
@@ -56,8 +40,4 @@ export function calculateRiceScore(
   effort: number,
 ): number {
   return (reach * impact * confidence) / effort;
-}
-
-export function statusLabel(status: FeatureStatus): string {
-  return STATUS_OPTIONS.find((option) => option.value === status)?.label ?? status;
 }

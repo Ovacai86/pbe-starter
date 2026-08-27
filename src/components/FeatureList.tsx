@@ -1,4 +1,4 @@
-import { statusLabel, type Feature } from "@/lib/rice";
+import { type Feature } from "@/lib/rice";
 
 export function FeatureList({ features }: { features: Feature[] }) {
   if (features.length === 0) {
@@ -19,7 +19,6 @@ export function FeatureList({ features }: { features: Feature[] }) {
           <tr>
             <th className="px-4 py-3 font-medium">Título</th>
             <th className="px-4 py-3 font-medium">Categoría</th>
-            <th className="px-4 py-3 font-medium">Estado</th>
             <th className="px-4 py-3 font-medium text-right">Score RICE</th>
           </tr>
         </thead>
@@ -36,11 +35,6 @@ export function FeatureList({ features }: { features: Feature[] }) {
               </td>
               <td className="px-4 py-3 text-zinc-600 dark:text-zinc-300">
                 {feature.category}
-              </td>
-              <td className="px-4 py-3">
-                <span className="inline-flex rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
-                  {statusLabel(feature.status)}
-                </span>
               </td>
               <td className="px-4 py-3 text-right font-mono font-medium text-zinc-900 dark:text-zinc-50">
                 {feature.riceScore.toFixed(2)}

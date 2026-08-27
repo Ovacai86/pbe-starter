@@ -5,17 +5,14 @@ import {
   CATEGORY_SUGGESTIONS,
   CONFIDENCE_OPTIONS,
   IMPACT_OPTIONS,
-  STATUS_OPTIONS,
   calculateRiceScore,
   type Feature,
-  type FeatureStatus,
 } from "@/lib/rice";
 
 interface FormState {
   title: string;
   description: string;
   category: string;
-  status: FeatureStatus;
   reach: string;
   impact: string;
   confidence: string;
@@ -26,7 +23,6 @@ const initialState: FormState = {
   title: "",
   description: "",
   category: "",
-  status: "idea",
   reach: "",
   impact: "",
   confidence: "",
@@ -112,7 +108,6 @@ export function FeatureForm({
       title: form.title.trim(),
       description: form.description.trim(),
       category: form.category.trim(),
-      status: form.status,
       reach,
       impact,
       confidence,
@@ -162,47 +157,25 @@ export function FeatureForm({
         )}
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label htmlFor="category" className={labelClasses}>
-            Categoría
-          </label>
-          <input
-            id="category"
-            type="text"
-            list={categoryListId}
-            className={inputClasses}
-            value={form.category}
-            onChange={(e) => updateField("category", e.target.value)}
-            placeholder="Ej: onboarding"
-          />
-          <datalist id={categoryListId}>
-            {CATEGORY_SUGGESTIONS.map((suggestion) => (
-              <option key={suggestion} value={suggestion} />
-            ))}
-          </datalist>
-          {errors.category && <p className={errorClasses}>{errors.category}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="status" className={labelClasses}>
-            Estado
-          </label>
-          <select
-            id="status"
-            className={inputClasses}
-            value={form.status}
-            onChange={(e) =>
-              updateField("status", e.target.value as FeatureStatus)
-            }
-          >
-            {STATUS_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div>
+        <label htmlFor="category" className={labelClasses}>
+          Categoría
+        </label>
+        <input
+          id="category"
+          type="text"
+          list={categoryListId}
+          className={inputClasses}
+          value={form.category}
+          onChange={(e) => updateField("category", e.target.value)}
+          placeholder="Ej: onboarding"
+        />
+        <datalist id={categoryListId}>
+          {CATEGORY_SUGGESTIONS.map((suggestion) => (
+            <option key={suggestion} value={suggestion} />
+          ))}
+        </datalist>
+        {errors.category && <p className={errorClasses}>{errors.category}</p>}
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
