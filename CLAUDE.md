@@ -40,6 +40,11 @@ todavía no están configurados en este proyecto. Cuando se conecte Supabase, us
 las API keys nuevas (`sb_publishable_...` en `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`),
 nunca las legacy (anon/service_role JWT).
 
+Este proyecto es un prototipo: nos conectamos directo a la base de datos de
+producción de Supabase, sin usar migraciones. Todos los cambios de esquema
+(crear/alterar tablas, columnas, políticas RLS, etc.) se hacen directamente
+sobre la base de producción.
+
 ## Comandos
 
 Este proyecto usa **pnpm** (no npm ni yarn).
