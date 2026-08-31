@@ -5,8 +5,7 @@ import {
   CATEGORY_SUGGESTIONS,
   CONFIDENCE_OPTIONS,
   IMPACT_OPTIONS,
-  calculateRiceScore,
-  type Feature,
+  type NewFeatureInput,
 } from "@/lib/rice";
 
 interface FormState {
@@ -78,10 +77,12 @@ const errorClasses = "mt-1 text-sm text-red-600 dark:text-red-400";
 export function FeatureForm({
   onAddFeature,
 }: {
-  onAddFeature: (feature: Feature) => void;
+  onAddFeature: (feature: NewFeatureInput) => Promise<void>;
 }) {
   const [form, setForm] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const categoryListId = useId();
 
   function updateField<K extends keyof FormState>(field: K, value: FormState[K]) {
@@ -89,7 +90,7 @@ export function FeatureForm({
     setErrors((prev) => ({ ...prev, [field]: undefined }));
   }
 
-  function handleSubmit(event: React.FormEvent) {
+  async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
     const validationErrors = validate(form);
@@ -98,25 +99,28 @@ export function FeatureForm({
       return;
     }
 
-    const reach = Number(form.reach);
-    const impact = Number(form.impact);
-    const confidence = Number(form.confidence);
-    const effort = Number(form.effort);
-
-    const feature: Feature = {
-      id: crypto.randomUUID(),
+    const feature: NewFeatureInput = {
       title: form.title.trim(),
       description: form.description.trim(),
       category: form.category.trim(),
-      reach,
-      impact,
-      confidence,
-      effort,
-      riceScore: calculateRiceScore(reach, impact, confidence, effort),
+      reach: Number(form.reach),
+      impact: Number(form.impact),
+      confidence: Number(form.confidence),
+      effort: Number(form.effort),
     };
 
-    onAddFeature(feature);
-    setForm(initialState);
+    setIsSubmitting(true);
+    setSubmitError(null);
+    try {
+      await onAddFeature(feature);
+      setForm(initialState);
+    } catch {
+      setSubmitError(
+        "No pudimos guardar la feature. Intenta de nuevo en unos segundos.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -255,11 +259,14 @@ export function FeatureForm({
         </div>
       </div>
 
+      {submitError && <p className={errorClasses}>{submitError}</p>}
+
       <button
         type="submit"
-        className="self-start rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+        disabled={isSubmitting}
+        className="self-start rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
       >
-        Agregar feature
+        {isSubmitting ? "Guardando..." : "Agregar feature"}
       </button>
     </form>
   );

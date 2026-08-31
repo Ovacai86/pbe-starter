@@ -10,6 +10,8 @@ export interface Feature {
   riceScore: number;
 }
 
+export type NewFeatureInput = Omit<Feature, "id" | "riceScore">;
+
 export const IMPACT_OPTIONS: { value: number; label: string }[] = [
   { value: 0.25, label: "Mínimo (0.25)" },
   { value: 0.5, label: "Bajo (0.5)" },
@@ -33,11 +35,3 @@ export const CATEGORY_SUGGESTIONS = [
   "Performance",
 ];
 
-export function calculateRiceScore(
-  reach: number,
-  impact: number,
-  confidence: number,
-  effort: number,
-): number {
-  return (reach * impact * confidence) / effort;
-}
