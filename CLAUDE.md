@@ -30,6 +30,38 @@ La app terminada permite a un equipo de producto:
 No construyas todo esto de una vez: el curso lo desarrolla módulo a módulo.
 Implementa solo lo que se te pida en cada prompt.
 
+## Estado actual
+
+**Ya implementado:**
+- Captura de features con formulario validado (título, descripción, categoría,
+  reach, impact, confidence, effort) y cálculo automático de score RICE.
+- Listado principal ordenado cronológicamente (más vieja arriba por defecto),
+  con dropdown para invertir el orden (más nueva primero).
+- Popup con ranking de features por score RICE (`RiceRankingDialog`).
+- Popup con matriz Impacto vs. Esfuerzo y sus cuatro cuadrantes (`ImpactEffortDialog`):
+  eje Impacto dividido en el umbral fijo de la escala (>1 = alto), eje Esfuerzo
+  dividido por la mediana del esfuerzo de las features cargadas.
+- Botón "Eliminar" por feature con diálogo de confirmación (`ConfirmDeleteDialog`)
+  antes de borrar en Supabase.
+- Conexión a Supabase (tabla `features`) para persistir captura, lectura y borrado.
+  RLS habilitado con políticas permisivas de SELECT/INSERT/DELETE para el rol
+  `anon`/`authenticated` (sin autenticación de usuarios todavía — prototipo de un
+  solo "workspace" compartido).
+- Deploy en Vercel (`ovacai86s-projects/pbe-starter`) conectado al repo de GitHub
+  (`Ovacai86/pbe-starter`): cada push a `main` dispara un deploy automático a
+  producción en `https://pbe-starter-delta.vercel.app`. Variables de entorno de
+  Supabase configuradas como env vars persistentes del proyecto en Vercel.
+
+**Todavía no implementado (pendiente del curso):**
+- Editar una feature ya capturada.
+- Filtro por estado (`idea`, `en_evaluacion`, `priorizada`, `en_desarrollo`,
+  `lanzada`) — el campo `status` fue removido del formulario en un módulo
+  temprano y aún no se reintrodujo.
+- Filtro por categoría (texto libre).
+- Colaboración en tiempo real (cambios de otros usuarios sin recargar).
+- Autenticación / multi-usuario — hoy cualquiera con la publishable key puede
+  leer, crear y borrar cualquier feature.
+
 ## Stack técnico
 
 - **Next.js** (App Router) con **TypeScript**
@@ -71,4 +103,4 @@ Este proyecto usa **pnpm** (no npm ni yarn).
 
 ---
 
-Última actualización: 2026-08-26
+Última actualización: 2026-09-01
