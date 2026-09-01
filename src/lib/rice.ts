@@ -8,9 +8,10 @@ export interface Feature {
   confidence: number;
   effort: number;
   riceScore: number;
+  createdAt: string;
 }
 
-export type NewFeatureInput = Omit<Feature, "id" | "riceScore">;
+export type NewFeatureInput = Omit<Feature, "id" | "riceScore" | "createdAt">;
 
 export const IMPACT_OPTIONS: { value: number; label: string }[] = [
   { value: 0.25, label: "Mínimo (0.25)" },
