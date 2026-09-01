@@ -1,6 +1,12 @@
 import { type Feature } from "@/lib/rice";
 
-export function FeatureList({ features }: { features: Feature[] }) {
+export function FeatureList({
+  features,
+  onDeleteFeature,
+}: {
+  features: Feature[];
+  onDeleteFeature: (feature: Feature) => void;
+}) {
   if (features.length === 0) {
     return (
       <div className="rounded-xl border border-dashed border-zinc-300 p-10 text-center dark:border-zinc-700">
@@ -20,6 +26,9 @@ export function FeatureList({ features }: { features: Feature[] }) {
             <th className="px-4 py-3 font-medium">Título</th>
             <th className="px-4 py-3 font-medium">Categoría</th>
             <th className="px-4 py-3 font-medium text-right">Score RICE</th>
+            <th className="px-4 py-3 font-medium text-right">
+              <span className="sr-only">Acciones</span>
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
@@ -38,6 +47,16 @@ export function FeatureList({ features }: { features: Feature[] }) {
               </td>
               <td className="px-4 py-3 text-right font-mono font-medium text-zinc-900 dark:text-zinc-50">
                 {feature.riceScore.toFixed(2)}
+              </td>
+              <td className="px-4 py-3 text-right">
+                <button
+                  type="button"
+                  onClick={() => onDeleteFeature(feature)}
+                  className="rounded-lg px-2 py-1 text-sm font-medium text-red-600 transition hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/40"
+                  aria-label={`Eliminar ${feature.title}`}
+                >
+                  Eliminar
+                </button>
               </td>
             </tr>
           ))}

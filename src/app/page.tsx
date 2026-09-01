@@ -5,6 +5,7 @@ import { FeatureForm } from "@/components/FeatureForm";
 import { FeatureList } from "@/components/FeatureList";
 import { RiceRankingDialog } from "@/components/RiceRankingDialog";
 import { ImpactEffortDialog } from "@/components/ImpactEffortDialog";
+import { ConfirmDeleteDialog } from "@/components/ConfirmDeleteDialog";
 import { supabase } from "@/lib/supabase";
 import type { Feature, NewFeatureInput } from "@/lib/rice";
 
@@ -45,6 +46,9 @@ export default function Home() {
   const [sortOrder, setSortOrder] = useState<SortOrder>("oldest");
   const [isRankingOpen, setIsRankingOpen] = useState(false);
   const [isMatrixOpen, setIsMatrixOpen] = useState(false);
+  const [featureToDelete, setFeatureToDelete] = useState<Feature | null>(
+    null,
+  );
 
   useEffect(() => {
     let isMounted = true;
@@ -86,6 +90,20 @@ export default function Home() {
     }
 
     setFeatures((prev) => [...prev, toFeature(data as FeatureRow)]);
+  }
+
+  async function handleDeleteFeature(feature: Feature) {
+    const { error } = await supabase
+      .from("features")
+      .delete()
+      .eq("id", feature.id);
+
+    if (error) {
+      throw error;
+    }
+
+    setFeatures((prev) => prev.filter((f) => f.id !== feature.id));
+    setFeatureToDelete(null);
   }
 
   const sortedFeatures = useMemo(() => {
@@ -156,7 +174,10 @@ export default function Home() {
             </p>
           </div>
         ) : (
-          <FeatureList features={sortedFeatures} />
+          <FeatureList
+            features={sortedFeatures}
+            onDeleteFeature={setFeatureToDelete}
+          />
         )}
       </div>
 
@@ -170,6 +191,12 @@ export default function Home() {
         features={features}
         open={isMatrixOpen}
         onClose={() => setIsMatrixOpen(false)}
+      />
+
+      <ConfirmDeleteDialog
+        feature={featureToDelete}
+        onConfirm={handleDeleteFeature}
+        onClose={() => setFeatureToDelete(null)}
       />
     </main>
   );
